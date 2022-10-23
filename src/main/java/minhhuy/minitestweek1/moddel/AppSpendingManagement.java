@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class AppSpendingManagement {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     private String name;
     private double price;
     private String description;
@@ -17,7 +17,7 @@ public class AppSpendingManagement {
     public AppSpendingManagement() {
     }
 
-    public AppSpendingManagement(int id, String name, double price, String description, String spendingList, String image) {
+    public AppSpendingManagement(Long id, String name, double price, String description, String spendingList, String image) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -26,11 +26,11 @@ public class AppSpendingManagement {
         this.image = image;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -1,0 +1,48 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head"></head>
+<meta charset="UTF-8">
+</head>
+<body>
+<h3>delete App</h3>
+<h4>are you sure?</h4>
+<p>
+    <a th:href="@{/app}">
+        Back list
+    </a>
+</p>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<div>
+    <form th:action="@{/delete}" th:object="${app}" method="post" novalidate="novalidate"
+          enctype="multipart/form-data">
+        <input type="hidden" name="id" th:field="*{id}">
+        <table>
+            <div>
+                <label>Name: </label>
+                <label th:text="${app.name}"></label>
+            </div>
+            <div>
+                <label>price: </label>
+                <label th:text="${app.price}"></label>
+            </div>
+            <div>
+                <label>description: </label>
+                <label th:text="${app.description}"></label>
+            </div>
+            <div>
+                <label>spendingList: </label>
+                <label th:text="${app.spendingList}"></label>
+            </div>
+            <div>
+                <label>image: </label>
+                <label th:text="${app.image}"></label>
+            </div>
+            <input type="submit" value="delete"/>
+        </table>
+    </form>
+</div>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>

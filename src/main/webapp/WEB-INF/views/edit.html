@@ -1,0 +1,47 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head"></head>
+<meta charset="UTF-8">
+</head>
+<body>
+<h3>Edit App</h3>
+<p>
+    <a th:href="@{/app}">
+        Back list
+    </a>
+</p>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<div>
+    <form th:action="@{/edit}" th:object="${app}" method="post" novalidate="novalidate"
+          enctype="multipart/form-data">
+        <input type="hidden" name="id" th:field="*{id}">
+        <table>
+            <div>
+                <label>Name: </label>
+                <input type="text" th:field="*{name}"/>
+            </div>
+            <div>
+                <label>price: </label>
+                <input type="text" th:field="*{price}"/>
+            </div>
+            <div>
+                <label>description: </label>
+                <input type="text" th:field="*{description}"/>
+            </div>
+            <div>
+                <label>spendingList: </label>
+                <input type="text" th:field="*{spendingList}"/>
+            </div>
+            <div>
+                <label>image: </label>
+                <input type="file" th:field="*{image}">
+            </div>
+            <input type="submit" value="update"/>
+        </table>
+    </form>
+</div>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>

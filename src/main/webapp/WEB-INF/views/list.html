@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<a th:href="@{/add}">list app </a>
+<h1>App</h1>
+<table border="1">
+    <tr>
+        <td>Name:</td>
+        <td>price:</td>
+        <td>description:</td>
+        <td>spendingList:</td>
+        <td>image:</td>
+        <td style="color:deepskyblue">Edit</td>
+        <td style="color:deepskyblue">Delete</td>
+    </tr>
+    <th:block th:each="app : ${app}">
+        <tr>
+            <td th:text="${app.name}"></td>
+            <td th:text="${app.price}"></td>
+            <td th:text="${app.description}"></td>
+            <td th:text="${app.spendingList}"></td>
+            <td th:text="${app.image}"></td>
+            <td><a th:href="@{/edit/_${app.id}_}">Edit</a></td>
+            <td><a th:href="@{/delete/_${app.id}_}">Delete</a></td>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>

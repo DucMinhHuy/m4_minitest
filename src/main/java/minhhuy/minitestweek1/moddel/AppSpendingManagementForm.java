@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class AppSpendingManagementForm {
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     private String name;
     private double price;
     private String description;
@@ -19,7 +19,7 @@ public class AppSpendingManagementForm {
     public AppSpendingManagementForm() {
     }
 
-    public AppSpendingManagementForm(int id, String name, double price, String description, String spendingList, MultipartFile image) {
+    public AppSpendingManagementForm(Long id, String name, double price, String description, String spendingList, MultipartFile image) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -28,11 +28,11 @@ public class AppSpendingManagementForm {
         this.image = image;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
