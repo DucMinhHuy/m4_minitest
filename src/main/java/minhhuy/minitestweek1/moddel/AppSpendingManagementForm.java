@@ -2,6 +2,8 @@ package minhhuy.minitestweek1.moddel;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.*;
+
 //import javax.persistence.*;
 
 //@Entity

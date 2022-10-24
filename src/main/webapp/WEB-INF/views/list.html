@@ -16,15 +16,15 @@
         <td style="color:deepskyblue">Edit</td>
         <td style="color:deepskyblue">Delete</td>
     </tr>
-    <th:block th:each="app : ${app}">
+    <th:block th:each="apps : ${app}">
         <tr>
-            <td th:text="${app.name}"></td>
-            <td th:text="${app.price}"></td>
-            <td th:text="${app.description}"></td>
-            <td th:text="${app.spendingList}"></td>
-            <td th:text="${app.image}"></td>
-            <td><a th:href="@{/edit/_${app.id}_}">Edit</a></td>
-            <td><a th:href="@{/delete/_${app.id}_}">Delete</a></td>
+            <td th:text="${apps.name}"></td>
+            <td th:text="${apps.price}"></td>
+            <td th:text="${apps.description}"></td>
+            <td th:text="${apps.spendingList}"></td>
+            <td th:text="${apps.image}"></td>
+            <td><a th:href="@{edit/_${apps.id}_}">Edit</a></td>
+            <td><a th:href="@{delete/_${apps.id}_}">Delete</a></td>
         </tr>
     </th:block>
 </table>

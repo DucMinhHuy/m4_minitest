@@ -38,7 +38,7 @@ import java.util.Properties;
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
-@ComponentScan("minhhuy.minitestweek1.controller")
+@ComponentScan("minhhuy.minitestweek1")
 @PropertySource("classpath:upload_file.properties")
 public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
 
@@ -55,7 +55,7 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
-        templateResolver.setPrefix("/WEB-INF/views");
+        templateResolver.setPrefix("/WEB-INF/views/");
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode(TemplateMode.HTML);
         templateResolver.setCharacterEncoding("UTF-8");
@@ -87,8 +87,9 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
     public void addResourceHandlers(ResourceHandlerRegistry registry){
         registry.addResourceHandler("/huy/**").addResourceLocations("file:"+file);
     }
+//    @Bean("multipartResolver")
     @Bean
-    public CommonsMultipartResolver getRes() throws IOException {
+    public CommonsMultipartResolver multipartResolver() throws IOException {
         CommonsMultipartResolver resolver=new CommonsMultipartResolver();
         resolver.setMaxUploadSizePerFile(52429999);
         return resolver;
@@ -98,7 +99,7 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan("minhhuy.bai6.model");
+        em.setPackagesToScan("minhhuy.minitestweek1.moddel");
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);

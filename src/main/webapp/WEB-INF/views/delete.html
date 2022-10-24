@@ -14,32 +14,34 @@
 <th:block th:if="${message}">
     <p th:text="${message}"></p>
 </th:block>
-<div>
-    <form th:action="@{/delete}" th:object="${app}" method="post" novalidate="novalidate"
+<div id="form">
+    <form th:action="@{/delete}" th:object="${appForm}" method="post" novalidate="novalidate"
           enctype="multipart/form-data">
-        <input type="hidden" name="id" th:field="*{id}">
+        <input th:type="hidden" name="id" th:field="*{id}">
         <table>
             <div>
                 <label>Name: </label>
-                <label th:text="${app.name}"></label>
+                <label th:text="${appForm.name}"></label>
             </div>
             <div>
                 <label>price: </label>
-                <label th:text="${app.price}"></label>
+                <label th:text="${appForm.price}"></label>
             </div>
             <div>
                 <label>description: </label>
-                <label th:text="${app.description}"></label>
+                <label th:text="${appForm.description}"></label>
             </div>
             <div>
                 <label>spendingList: </label>
-                <label th:text="${app.spendingList}"></label>
+                <label th:text="${appForm.spendingList}"></label>
             </div>
             <div>
                 <label>image: </label>
-                <label th:text="${app.image}"></label>
+                <label th:text="${appForm.image}"></label>
             </div>
-            <input type="submit" value="delete"/>
+            <div>
+                <td><input type="submit" value="delete"/></td>
+            </div>
         </table>
     </form>
 </div>

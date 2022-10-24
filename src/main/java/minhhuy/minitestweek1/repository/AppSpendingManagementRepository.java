@@ -6,14 +6,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import java.util.List;
-
+@Transactional
 public class AppSpendingManagementRepository implements IAppSpendingManagementRepository{
     @PersistenceContext
     private EntityManager manager;
     @Override
     public List<AppSpendingManagement> findAll() {
-        TypedQuery<AppSpendingManagement>query=manager.createQuery("SELECT c FROM AppSpendingManagement c", AppSpendingManagement.class);
+        TypedQuery<AppSpendingManagement>query=manager.createQuery("SELECT c FROM minhhuy.minitestweek1.moddel.AppSpendingManagement c", AppSpendingManagement.class);
         return query.getResultList();
     }
 
