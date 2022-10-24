@@ -23,8 +23,8 @@
             <td th:text="${apps.description}"></td>
             <td th:text="${apps.spendingList}"></td>
             <td th:text="${apps.image}"></td>
-            <td><a th:href="@{edit/_${apps.id}_}">Edit</a></td>
-            <td><a th:href="@{delete/_${apps.id}_}">Delete</a></td>
+            <td><a th:href="@{'edit/'+${apps.id}}">Edit</a></td>
+            <td><a th:href="@{delete/__${apps.id}__}">Delete</a></td>
         </tr>
     </th:block>
 </table>
