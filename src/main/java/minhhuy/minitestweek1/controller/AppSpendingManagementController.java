@@ -24,49 +24,50 @@ public class AppSpendingManagementController {
     private String file;
     @Autowired
     private IAppSpendingManagementService appSpendingManagementService;
-    @GetMapping("/add")
+    @GetMapping("add")
     public ModelAndView showAddForm() {
-        ModelAndView modelAndView = new ModelAndView("/add");
-        modelAndView.addObject("app",new AppSpendingManagement());
+        ModelAndView modelAndView = new ModelAndView("add");
+        modelAndView.addObject("appForm",new AppSpendingManagement());
         return modelAndView;
     }
-    @PostMapping("/add")
-    public ModelAndView addApp(@ModelAttribute AppSpendingManagementForm appSpendingManagementForm){
-        MultipartFile multipartFile=appSpendingManagementForm.getImage();
-        String fileName=multipartFile.getOriginalFilename();
+    @PostMapping("add")
+    public ModelAndView addApp(@ModelAttribute AppSpendingManagementForm appSpendingManagementForm1){
+        System.out.println(appSpendingManagementForm1);
+        MultipartFile multipartFile1=appSpendingManagementForm1.getImage();
+        String fileName=multipartFile1.getOriginalFilename();
         try{
-            FileCopyUtils.copy(appSpendingManagementForm.getImage().getBytes(),new File(file +fileName));
+            FileCopyUtils.copy(appSpendingManagementForm1.getImage().getBytes(),new File(file +fileName));
         }catch (IOException e){
             e.printStackTrace();
         }
-        AppSpendingManagement app=new AppSpendingManagement(appSpendingManagementForm.getId(),appSpendingManagementForm.getName(),appSpendingManagementForm.getPrice(),appSpendingManagementForm.getDescription(),appSpendingManagementForm.getSpendingList(),fileName);
+        AppSpendingManagement app=new AppSpendingManagement(appSpendingManagementForm1.getId(),appSpendingManagementForm1.getName(),appSpendingManagementForm1.getPrice(),appSpendingManagementForm1.getDescription(),appSpendingManagementForm1.getSpendingList(),fileName);
         appSpendingManagementService.save(app);
-        ModelAndView modelAndView=new ModelAndView("/add");
-        modelAndView.addObject("appForm",appSpendingManagementForm);
+        ModelAndView modelAndView=new ModelAndView("add");
+        modelAndView.addObject("appForm",appSpendingManagementForm1);
         modelAndView.addObject("message","created new app successfully ^_^");
         return modelAndView;
     }
-    @GetMapping("/app")
+    @GetMapping("app")
     public ModelAndView listApp(){
         List<AppSpendingManagement> app=appSpendingManagementService.findAll();
-        ModelAndView modelAndView=new ModelAndView("/list");
+        ModelAndView modelAndView=new ModelAndView("list");
         modelAndView.addObject("app",app);
         return modelAndView;
     }
-    @GetMapping("/edit/{id}")
+    @GetMapping("edit/{id}")
     public ModelAndView showEditForm(@PathVariable Long id){
         AppSpendingManagement app=appSpendingManagementService.findById(id);
         if(app!=null){
-            ModelAndView modelAndView=new ModelAndView("/edit");
-            modelAndView.addObject("app",app);
+            ModelAndView modelAndView=new ModelAndView("edit");
+            modelAndView.addObject("appForm",app);
             return modelAndView;
         }else {
-            ModelAndView modelAndView=new ModelAndView("/error.404");
+            ModelAndView modelAndView=new ModelAndView("error.404");
             return modelAndView;
         }
     }
-    @PostMapping("/edit")
-    public ModelAndView updateApp(@PathVariable("app")AppSpendingManagementForm appSpendingManagementForm){
+    @PostMapping("edit")
+    public ModelAndView updateApp(@PathVariable("appForm")AppSpendingManagementForm appSpendingManagementForm){
         MultipartFile multipartFile=appSpendingManagementForm.getImage();
         String fileName=multipartFile.getOriginalFilename();
         try{
@@ -76,26 +77,26 @@ public class AppSpendingManagementController {
         }
         AppSpendingManagement app=new AppSpendingManagement(appSpendingManagementForm.getId(),appSpendingManagementForm.getName(),appSpendingManagementForm.getPrice(),appSpendingManagementForm.getDescription(),appSpendingManagementForm.getSpendingList(),fileName);
         appSpendingManagementService.save(app);
-        ModelAndView modelAndView=new ModelAndView("/edit");
-      modelAndView.addObject("app",appSpendingManagementForm);
+        ModelAndView modelAndView=new ModelAndView("edit");
+      modelAndView.addObject("appForm",appSpendingManagementForm);
       modelAndView.addObject("message","app update");
       return modelAndView;
     }
-    @GetMapping("/delete")
+    @GetMapping("delete/{id}")
     public ModelAndView deleteApp(@PathVariable Long id){
         AppSpendingManagement app=appSpendingManagementService.findById(id);
         if(app!=null){
-            ModelAndView modelAndView=new ModelAndView("/delete");
-            modelAndView.addObject("app",app);
+            ModelAndView modelAndView=new ModelAndView("delete");
+            modelAndView.addObject("appForm",app);
             return modelAndView;
         }else {
-            ModelAndView modelAndView=new ModelAndView("/error.404");
+            ModelAndView modelAndView=new ModelAndView("error.404");
             return modelAndView;
         }
     }
     @PostMapping("delete")
-    public String appDelete(@ModelAttribute("app")AppSpendingManagementForm appSpendingManagementForm){
+    public String appDelete(@ModelAttribute("appForm")AppSpendingManagementForm appSpendingManagementForm){
         appSpendingManagementService.remove(appSpendingManagementForm.getId());
-        return "redirect:/app";
+        return "redirect:app";
     }
 }

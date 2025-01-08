@@ -13,8 +13,8 @@
 <th:block th:if="${message}">
     <p th:text="${message}"></p>
 </th:block>
-<div>
-    <form th:action="@{/edit}" th:object="${app}" method="post" novalidate="novalidate"
+<div id="form">
+    <form th:action="@{/edit}" th:object="${appForm}" method="post" novalidate="novalidate"
           enctype="multipart/form-data">
         <input type="hidden" name="id" th:field="*{id}">
         <table>
